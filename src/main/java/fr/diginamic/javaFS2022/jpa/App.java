@@ -1,8 +1,6 @@
 package fr.diginamic.javaFS2022.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -30,7 +28,6 @@ public class App
     	
     	Livre livre2 = new Livre(6, "Les meilleures blagues de toto", "Martin Martin");
     	em.persist(livre2);
-    	
     	System.out.println("livre inséré : " + livre2.toString());
     	
     	em.getTransaction().commit();
@@ -42,13 +39,13 @@ public class App
     	*/
     	
     	String titre = "Germinal";
-    	TypedQuery<Livre> query1 = em.createQuery("SELECT l FROM livre l WHERE l.titre='" + titre + "'", Livre.class);
+    	TypedQuery<Livre> query1 = em.createQuery("SELECT l FROM LIVRE l WHERE l.titre='" + titre + "'", Livre.class);
     	Livre livre4 = query1.getResultList().get(0);
     	System.out.println("livre trouvé avec le titre : " + titre + " / : " + livre4.toString());
     	
     	
     	String auteur = "Martin Martin";
-    	TypedQuery<Livre> query2 = em.createQuery("SELECT l FROM livre l WHERE l.auteur='" + auteur + "'", Livre.class);
+    	TypedQuery<Livre> query2 = em.createQuery("SELECT l FROM LIVRE l WHERE l.auteur='" + auteur + "'", Livre.class);
     	Livre livre5 = query2.getResultList().get(0);
     	System.out.println("livre trouvé avec l'auteur : " + auteur + " / : " + livre5.toString());
     	
@@ -57,9 +54,9 @@ public class App
     	System.out.println("livre à supprimer : " + livre6.toString());
     	em.remove(livre6);
     	
-    	List<Livre> livres = new ArrayList<>();
-    	TypedQuery<Livre> query3 = em.createQuery("SELECT l FROM livre l", Livre.class);
-    	livres = query3.getResultList();
+    	//List<Livre> livres = new ArrayList<>();
+    	TypedQuery<Livre> query3 = em.createQuery("SELECT l FROM LIVRE l", Livre.class);
+    	List<Livre> livres = query3.getResultList();
     	
     	em.getTransaction().commit();
     	
@@ -68,8 +65,6 @@ public class App
     	for(Livre livre : livres) {
     		System.out.println(livre.toString());
     	}
-    	
-    	
     	
     	em.close();
     	emf.close();

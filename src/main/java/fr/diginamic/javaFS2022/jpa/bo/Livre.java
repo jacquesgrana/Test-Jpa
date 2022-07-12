@@ -1,25 +1,49 @@
 package fr.diginamic.javaFS2022.jpa.bo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-@Entity(name = "livre")
+@Entity(name = "LIVRE")
 public class Livre {
 	
+	
+
 	@Id
+	@Column(name = "ID")
 	private Integer id;
 	
-	@Column(name = "titre")
+	@Column(name = "TITRE")
 	private String titre;
 	
-	@Column(name = "auteur")
+	@Column(name = "AUTEUR")
 	private String auteur;
+	
+	@OneToMany(mappedBy="livre")
+	private Set<Compo> compo_livre;
 
 	/**
 	 * 
 	 */
 	public Livre() {}
+
+	
+	
+	/**
+	 * @param titre
+	 * @param auteur
+	 */
+	public Livre(String titre, String auteur) {
+		//super();
+		this.titre = titre;
+		this.auteur = auteur;
+	}
+
+
 
 	/**
 	 * @param id
